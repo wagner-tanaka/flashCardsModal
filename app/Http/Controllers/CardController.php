@@ -12,6 +12,12 @@ use Illuminate\Support\Facades\Auth;
 class CardController extends Controller
 {
 
+    public function getCards(Deck $deck){
+        
+        $cards = $deck->cards;
+        
+        return response()->json(['cards' => $cards]);
+    }
 
 
     public function index()

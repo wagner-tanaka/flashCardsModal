@@ -2,6 +2,13 @@
 
 @section('content')
 
+<div style="width:200px; height:200px; border:1px solid red; margin-bottom:10px">
+    <meu-componente deck-id="{{ $deck->id }}"></meu-componente>   
+</div>
+
+<div>
+    {{-- <meu-botao></meu-botao>    --}}
+</div>
 
 @if($current_card)
 <a class="link-style" href="/play_flash_cards/{{$deck->id}}?side={{ request('side')  == 'back' ? 'front' : 'back'}}">
@@ -10,9 +17,7 @@
         @if( $current_card)
         <h1>{{ $current_card[request('side') ?? 'front'] }} </h1>
         @else
-        
-                Você revisou todas as cartas de hoje
-           
+            Você revisou todas as cartas de hoje
         @endif
     </div>
 </a>
