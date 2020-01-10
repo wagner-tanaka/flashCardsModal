@@ -1911,31 +1911,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      lado: 'frente',
+      lado: 'front',
       indice: 0,
-      cartas: [{
-        frente: 'aa',
-        verso: 'AA',
-        acertou: ''
-      }, {
-        frente: 'bb',
-        verso: 'BB',
-        acertou: ''
-      }, {
-        frente: 'cc',
-        verso: 'CC',
-        acertou: ''
-      }, {
-        frente: 'dd',
-        verso: 'DD',
-        acertou: ''
-      }]
+      cartas: ''
     };
   },
+  //   ---------------------------------------------------------------
   props: ['deckId'],
+  // recebe o deck-id que foi pego da pagina play_flash_cards.blade
+  //   -----------------------------------------------------
   methods: {
     trocaLado: function trocaLado() {
-      this.lado = this.lado == 'frente' ? 'verso' : 'frente';
+      this.lado = this.lado == 'front' ? 'back' : 'front';
     },
     acertou: function acertou() {
       this.cartas[this.indice].acertou = true;
@@ -1945,11 +1932,18 @@ __webpack_require__.r(__webpack_exports__);
       this.cartas[this.indice].acertou = false;
       this.indice = this.indice + 1;
     },
+    // -----------------------------------------------------------------------------------------
     getCards: function getCards() {
-      window.axios.get('/api/get_cards/' + this.deckId).then(function (response) {
-        console.log(response);
+      var _this = this;
+
+      // onde essa função é chamada?
+      window.axios.get('/api/get_cards/' + this.deckId).then(function (resposta) {
+        console.log(resposta.data.cards);
+        _this.cartas = resposta.data.cards;
       });
-    }
+    } // Usa essa função para pegar o Id do deck
+    // -----------------------------------------------------------------------------------------
+
   },
   mounted: function mounted() {
     this.getCards();
@@ -37293,7 +37287,11 @@ var render = function() {
       _c(
         "div",
         { staticClass: "text-center pt-5", on: { click: _vm.trocaLado } },
-        [_c("h1", [_vm._v(_vm._s(_vm.cartas[_vm.indice][_vm.lado]))])]
+        [
+          _vm.cartas !== ""
+            ? _c("h1", [_vm._v(_vm._s(_vm.cartas[_vm.indice][_vm.lado]))])
+            : _vm._e()
+        ]
       )
     ]),
     _vm._v(" "),

@@ -3,7 +3,9 @@
 @section('content')
 
 <div style="width:200px; height:200px; border:1px solid red; margin-bottom:10px">
-    <meu-componente deck-id="{{ $deck->id }}"></meu-componente>   
+{{-- ------------------------------------------------------------------------------------------------- --}}
+    <meu-componente deck-id="{{ $deck->id }}"></meu-componente> {{-- aqui pega o $deck->id da pagina e passa para o vue como deck-id
+{{-- ----------------------------------------------------------------------------------------------------     --}}
 </div>
 
 <div>

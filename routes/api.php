@@ -17,4 +17,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('get_cards/{deck}', 'CardController@getCards');
+// ------------------------------------------------------------
+
+Route::get('get_cards/{deck}', 'CardController@getCards'); // quando tenta acessar get_cards/1(número do id), nao aparece nada, entao,
+// api nao funciona como rota, mas essa rota serve para acessar CardController
+
+// -------------------------------------------------------------

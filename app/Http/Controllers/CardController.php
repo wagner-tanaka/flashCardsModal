@@ -12,14 +12,17 @@ use Illuminate\Support\Facades\Auth;
 class CardController extends Controller
 {
 
-    public function getCards(Deck $deck){
+// -----------------------------------------
+
+    public function getCards(Deck $deck){  // $deck = acessa o deck, no caso o id do deck. ex 1,2,3
+
+        $cards = $deck->cards; // pega todas as cartas do deck acessado
         
-        $cards = $deck->cards;
-        
-        return response()->json(['cards' => $cards]);
+        return response()->json(['cards' => $cards, 'outra_coisa' => 123]); // retorna uma resposta com o json de $cards(todas as cartas do deck). esse json
+                // vai se chamar 'cards'....certo?
     }
 
-
+// -------------------------------------------------
     public function index()
     { }
 
