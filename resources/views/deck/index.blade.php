@@ -19,10 +19,10 @@
         </div>
 
     </div>
-    <form action="/card" method="POST">
+    <form action="/card" enctype="multipart/form-data" method="POST">
         @csrf
 
-
+        <div class="container">
 
         <div class="md-form container">
             <label for="inputPlaceholderEx">Lado da frente</label>
@@ -49,6 +49,13 @@
 
         </div>
 
+        <div class="custom-file container mt-3 mb-3">
+            <input type="file" class="custom-file-input" id="arquivo" name="arquivo">
+            <label class="custom-file-label" for="arquivo">Escolha um arquivo</label>
+          </div>
+
+        </div>  
+
         <input type="hidden" name="deck_id" value="{{$deckId}}">
 
         <div class="ml-3 mt-1">
@@ -69,6 +76,7 @@
         <tr>
             <th>Front Side</th>
             <th>Back Side</th>
+            <th>Imagens</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -80,6 +88,8 @@
         <tr>
             <td>{{$card->front}}</td>
             <td>{{$card->back}}</td>
+            <td><img class="card-img-top figure-img img-fluid rounded" style="max-height: 50px; max-width: 50px;"
+                src="/storage/{{$card->arquivo}}"></td>
             <td>
                 <a href="/card/edit/{{$card->id}}" class="btn btn-sm btn-primary">Edit</a>
                 <a href="/card/destroy/{{$card->id}}" class="btn btn-sm btn-primary">Delete</a>

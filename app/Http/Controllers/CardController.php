@@ -8,6 +8,7 @@ use App\User;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class CardController extends Controller
 {
@@ -54,10 +55,12 @@ class CardController extends Controller
             'back' => 'required',
         ], $mensagens);
 
+        $path = $request->file('arquivo')->store('imagens','public');
         $card = new Card();
         $card->front = $request->input('front');
         $card->back = $request->input('back');
         $card->deck_id = $request->input('deck_id'); // usar essa linha para salvar no id do usuario autenticado
+        $card->arquivo = $path; 
         $card->save();
 
         return redirect('select_deck/' . $card->deck_id);
@@ -173,6 +176,10 @@ class CardController extends Controller
 
         return view('play_flash_cards', compact('deck', 'current_card'));
     }
+
+    public function testeComponente() {
+        return view('testeComponente');
+        }
 }
 
 

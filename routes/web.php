@@ -42,3 +42,6 @@ Route::get('/select_deck/{deck}', 'DeckController@selectDeck');
 Route::get('/decks', 'DeckController@decks');
 
 Route::get('/play_flash_cards/{deck}', 'CardController@play_flash_cards');
+
+
+Route::get('/testeComponente', 'CardController@testeComponente');

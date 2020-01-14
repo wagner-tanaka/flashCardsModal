@@ -1,0 +1,52 @@
+primeiro ao iniciar o projeto:
+npm run watch
+ctrl+f5 na pagina 
+
+1 - Na pasta resources/js/app.js - cria uma linha abaixo do 'window.Vue = require('vue')' assim:
+Vue.component('nome-componente', require('./components/NomeComponente.vue').default); -  
+usando o       kebab-case aqui            e o          PascalCase aqui     nessa ordem. Definido pelo Vue.
+
+2 - Na 'pasta resources/js/components' cria um arquivo com o mesmo nome do componente usado acima no padrão PascalCase:
+NomeComponente.vue
+
+3 - Dentro do componente  NomeComponente.vue - usa essa estrutura
+<template> 
+    <div>
+        Aqui dentro vai o que vc quer mandar para o front-end, todo o html
+    </div>
+</template>
+<script>
+aqui vai o Vue 
+ export default { // pra que essa linha?
+        data: function() { // data must be a function, here comes yours variables
+            return {
+                lado: 'front',
+                indice: 0,
+                cartas: '',           
+            }
+        },
+
+        props: ['deckId'], // recebe o deck-id que foi pego da pagina play_flash_cards.blade
+// Props são atributos personalizáveis que você pode registrar em um componente.
+// Quando um valor é passado para um atributo prop, ele torna-se uma propriedade daquela instância de componente
+
+        methods:{ // funções
+        
+            getCards(){ // essa função é chamada no mounted
+                window.axios.get('/api/get_cards/'+this.deckId).then((resposta) => { // window.axios vai pegar a rota get_cards/deckId, que vai retornar um json de cards
+                    console.log(resposta.data.cards, 'resposta')                     // e vai da como resposta essa linha
+                   // console.log(this.lado,'lado')
+                   // this.cartas = resposta.data.cards
+                })
+
+            } 
+        },
+        mounted(){ // monta tudo
+              this.getCards()
+        }
+    }
+
+</script>
+
+4 - e la dentro da pagina do view.blade, dentro de uma div coloca o nome do componente em kebab-case
+<div><nome-componente></nome-componente></div>

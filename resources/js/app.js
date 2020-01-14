@@ -20,7 +20,7 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('meu-componente', require('./components/MeuComponente.vue').default);
-Vue.component('meu-botao', require('./components/MeuBotao.vue').default);
+Vue.component('teste-componente', require('./components/TesteComponente.vue').default);
 
 
 /**

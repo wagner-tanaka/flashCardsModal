@@ -18,6 +18,7 @@ class CreateCardsTable extends Migration
             $table->text('strength')->nullable();
             $table->text('front');
             $table->text('back');
+            $table->string('arquivo')->nullable(); 
             $table->integer('deck_id')->unsigned()->nullable();
             $table->foreign('deck_id')->references('id')->on('decks');
             $table->timestamps();
